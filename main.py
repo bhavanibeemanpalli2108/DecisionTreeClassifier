@@ -52,9 +52,9 @@ def run_pipeline():
     print("\n>>> STEP 4: Preprocessing")
     X_train, X_test, y_train, y_test, _ = preprocess_data(df)
 
-    # Step 5: Train Decision Tree with hyperparameter tuning
-    print("\n>>> STEP 5: Model Training (Decision Tree)")
-    model, y_pred, best_params = train_model(X_train, y_train, X_test, y_test)
+    # Step 5: Train Decision Tree with hyperparameter tuning and pruning
+    print("\n>>> STEP 5: Model Training (Decision Tree with Pruning)")
+    model, y_pred, best_params, ccp_alpha = train_model(X_train, y_train, X_test, y_test)
 
     # Step 6: Detailed evaluation metrics
     print("\n>>> STEP 6: Evaluation")
@@ -69,14 +69,16 @@ def run_pipeline():
     print("  PIPELINE COMPLETE")
     print(f"  Best Params: max_depth={best_params['max_depth']}, "
           f"min_samples_split={best_params['min_samples_split']}")
+    print(f"  Pruning Alpha (ccp_alpha): {ccp_alpha:.6f}")
     print("  Artifacts saved in: artifacts/")
     print("  Run the app: streamlit run app/app.py")
     print("#" * 60 + "\n")
 
     logger.info(
-        "Pipeline finished successfully. Best params: max_depth=%d, min_samples_split=%d",
+        "Pipeline finished successfully. Best params: max_depth=%d, min_samples_split=%d, ccp_alpha=%.6f",
         best_params["max_depth"],
         best_params["min_samples_split"],
+        ccp_alpha,
     )
 
 

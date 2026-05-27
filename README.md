@@ -1,6 +1,6 @@
 # Iris Decision Tree Classification — End-to-End ML Project
 
-A beginner-friendly, modular machine learning project that classifies Iris flower species using **Decision Tree Classifier** on the built-in scikit-learn Iris dataset.
+A beginner-friendly, modular machine learning project that classifies Iris flower species using **Decision Tree Classifier with Cost-Complexity Pruning** on the built-in scikit-learn Iris dataset.
 
 ## Project Overview
 
@@ -12,10 +12,23 @@ This project demonstrates a complete ML workflow:
 | 2 | `data_cleaning.py` | Handle missing values, remove duplicates |
 | 3 | `outlier_handling.py` | Detect & cap outliers using IQR |
 | 4 | `preprocessing.py` | Train-test split with stratification |
-| 5 | `model_training.py` | Decision Tree with hyperparameter tuning (max_depth, min_samples_split) |
+| 5 | `model_training.py` | Decision Tree with hyperparameter tuning + cost-complexity pruning |
 | 6 | `evaluation.py` | Accuracy, precision, recall, F1 |
 | 7 | `prediction.py` | Load artifacts and predict |
 | 8 | `app/app.py` | Streamlit web interface |
+
+## Key Features
+
+**Hyperparameter Tuning:**
+- `max_depth`: Ranges from 2 to 10
+- `min_samples_split`: Tested with values [2, 5, 10]
+- Grid search evaluates all 30 combinations for optimal performance
+
+**Cost-Complexity Pruning:**
+- Implements post-pruning to prevent overfitting
+- Uses 5-fold cross-validation to find optimal `ccp_alpha`
+- Automatically removes subtrees that don't improve CV accuracy
+- Significantly reduces model complexity while maintaining performance
 
 ## Project Structure
 
